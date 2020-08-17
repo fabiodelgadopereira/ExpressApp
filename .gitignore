@@ -40,10 +40,10 @@ build/Release
 # Dependency directories
 node_modules
 node_modules/
-jspm_packages/
+jspm_packages
 
 # Snowpack dependency directory (https://snowpack.dev/)
-web_modules/
+web_modules
 
 # TypeScript cache
 *.tsbuildinfo
@@ -115,3 +115,32 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
+
+# npm
+node_modules
+package-lock.json
+*.log
+*.gz
+
+
+# Coveralls
+coverage
+
+# Benchmarking
+benchmarks/graphs
