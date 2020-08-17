@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/fabiodelgadopereira/ExpressApp#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0",
+    "swagger-ui-express": "^4.1.4"
   }
 }
