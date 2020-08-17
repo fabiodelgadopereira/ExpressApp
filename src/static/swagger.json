@@ -12,24 +12,24 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "application/json; charset=utf-8": {
               "schema": {
-                "$ref": "#/components/schemas/UserForRegisterDto"
+                "$ref": "#/components/schemas/userToRegister"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForRegisterDto"
+                "$ref": "#/components/schemas/userToRegister"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForRegisterDto"
+                "$ref": "#/components/schemas/userToRegister"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForRegisterDto"
+                "$ref": "#/components/schemas/userToRegister"
               }
             }
           }
@@ -41,31 +41,31 @@
         }
       }
     },
-    "/auth/login": {
+    "/auth/authenticate": {
       "post": {
         "tags": [
           "Auth"
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "application/json; charset=utf-8": {
               "schema": {
-                "$ref": "#/components/schemas/UserForLoginDto"
+                "$ref": "#/components/schemas/userToAuth"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForLoginDto"
+                "$ref": "#/components/schemas/userToAuth"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForLoginDto"
+                "$ref": "#/components/schemas/userToAuth"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserForLoginDto"
+                "$ref": "#/components/schemas/userToAuth"
               }
             }
           }
@@ -76,14 +76,202 @@
           }
         }
       }
+    },
+    "/Clientes": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cliente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cliente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Clientes/{id}": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/cliente"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cliente"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cliente"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cliente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "UserForRegisterDto": {
+      "userToRegister": {
         "required": [
-          "password",
-          "email"
+          "name",
+          "email",
+          "passwaord"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passwaord": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "userToAuth": {
+        "required": [
+          "email",
+          "password"
         ],
         "type": "object",
         "properties": {
@@ -98,14 +286,31 @@
         },
         "additionalProperties": false
       },
-      "UserForLoginDto": {
+      "cliente": {
         "type": "object",
         "properties": {
-          "email": {
+          "name": {
+            "maxLength": 80,
+            "minLength": 3,
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "cidade": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 80,
+            "minLength": 3,
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "sexo": {
+            "maxLength": 10,
+            "minLength": 3,
             "type": "string",
             "nullable": true
           }

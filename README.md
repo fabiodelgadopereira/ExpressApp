@@ -72,13 +72,14 @@ JSON Web Tokens (JWT) é um padrão stateless porque o servidor autorizador não
 
 Os JWTs são assinados usando um algoritmo de assinatura digital (por exemplo, RSA) que não pode ser forjado. Por isso, qualquer pessoa que confie no certificado do assinante pode confiar com segurança que o JWT é autêntico. Não há necessidade de um servidor consultar o servidor emissor de token para confirmar sua autenticidade.
 
-Nesse projeto, foi utilizado o `Bcrypt` como ferramenta de cryptografia.
+Nesse projeto, foi utilizado o `Bcrypt` como ferramenta de cryptografia. E o componente `jsonwebtoken` para gerar os tokens JWT.
 
 fonte: https://jwt.io/introduction/
 
 > Para instalar o Mongoose utilize o commando abaixo:
 ```shell
 npm install bcryptjs
+npm install jsonwebtoken
 ```
 
 ## MongoDB
