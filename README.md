@@ -116,3 +116,76 @@ const BlogPost = new Schema({
   date: Date
 });
 ```
+## SMTP
+
+O SMTP ou Simple Mail Transfer Protocol, é uma convenção padrão dedicada ao envio de e-mail. A princípio o protocolo SMTP utilizava por padrão a porta 25 ou 465 (conexão criptografada) para conexão, porém a partir de 2013 os provedores de internet e as operadoras do Brasil passaram a bloquear a porta 25, e começaram a usar a porta 587 para diminuir a quantidade de SPAM. O SMTP é um protocolo que faz apenas o envio de e-mails, isso significa que o usuário não tem permissão para baixar as mensagens do servidor, nesse caso é necessário utilizar um Client de e-mail que suporte os protocolos POP3 ou IMAP como o Outlook, Thunderbird e etc. Para negócios ou empresas pequenas com baixo volume de e-mails, o servidor SMTP gratuito do Google pode ser uma ótima solução e você pode usar o Gmail para enviar o seu e-mail. Eles possuem uma infraestrutura gigante e você pode confiar nos serviços deles para ficar online. Porém, mesmo sendo completamente grátis, tudo tem um limite. De acordo com a documentação do Google, você pode enviar até 100 e-mails a cada período de 24 horas quando envia através do servidor SMTP deles.  Ou você também pode pensar nisso como sendo 3 mil e-mails por mês gratuitamente.Dependendo de quantos e-mails você envia ou do tamanho do seu negócio, isto pode ser mais do que suficiente. Se você envia mais de 5 mil e-mails por mês, você vai preferir usar um serviço de e-mail transacional de terceiros ou um serviço premium. Nesse projeto foi utilizado o `nodemailer` para envio de e-mail e o `nodemailer-express-handlebars` para o tratamento de templates de e-mail. Os testes foram feitos utilizando o serviço do `mailtrap.io`.
+
+> Para instalar o Mongoose utilize o commando abaixo:
+```shell
+npm install nodemailer
+npm install nodemailer-express-handlebars
+```
+
+Exemplo de implementação:
+```js
+const nodemailer = require('nodemailer');
+const path = require('path');
+const hbs = require('nodemailer-express-handlebars');
+
+const mailConfig = {host, port, user, pass} = require('../config/mail.json');
+
+const transport = nodemailer.createTransport ({
+ host,
+ port,
+ auth: { user, pass },
+});
+
+transport.use('compile', hbs({
+    viewEngine: {
+      defaultLayout: undefined,
+      partialsDir: path.resolve('./src/static/')
+    },
+    viewPath: path.resolve('./src/static/'),
+    extName: '.html',
+  }));
+
+
+module.exports= transport
+```
+As configurações da aplicação estão no `config/mail.json`
+
+```js
+{
+    "host" : "smtp.mailtrap.io",
+    "port":  2525,
+    "user":"usuario",
+    "pass":"senha"
+}
+```
+
+Para enviar e-mail utilize o método
+
+```js
+    const contato = mailer.sendMail(
+      {
+        to: email,
+        from: "email@email.com",
+        template: "emailContato",
+        context: { email , mensagem , assunto },
+      },
+      (err) => {
+        if (err) throw new Error("Erro no mailer:");
+      }
+    );
+```
+
+O template de e-mail fica na pasta `/static/emailContato.html`
+
+```html
+<p>
+    E-mail de contato<br>
+    Remetente: {{email}}<br>
+    Assunto: {{assunto}} <br>
+    Mensagem: {{mensagem}}
+</p>
+```
