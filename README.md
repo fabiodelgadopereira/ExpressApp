@@ -9,7 +9,7 @@ Olá! Seja bem vindo ;)
 4. [JWT](#JWT)
 5. [MongoDB e Mongoose](#MongoDB-e-Mongoose)
 7. [SMTP](#SMTP)
-8. [Publicação](#Publicação)
+8. [Jest](#Jest)
 9. [Suporte](#Suporte)
 
 ## ExpressApp
@@ -22,7 +22,7 @@ Para executar essa aplicação, primeiro é necessário instalar o NodeJs. Depoi
 2. Extraia o conteúdo se o download for um arquivo zip. Verifique se os arquivos estão com read-write.
 3. Execute o comando abaixo no prompt de comando.
 ```shell
-node ./src/index.js
+node ./src/server.js
 ```
 4. A aplicação deverá estar disponivel em seu navegador no endereço: http://localhost:8178/api-docs/
 
@@ -189,3 +189,36 @@ O template de e-mail fica na pasta `/static/emailContato.html`
     Mensagem: {{mensagem}}
 </p>
 ```
+
+## Jest
+
+Teste de unidade é toda a aplicação de teste nas assinaturas de entrada e saída de um sistema. Consiste em validar dados válidos e inválidos via I/O (entrada/saída) sendo aplicado por desenvolvedores ou analistas de teste. Uma unidade é a menor parte testável de um programa de computador. Em programação procedural, uma unidade pode ser uma função individual ou um procedimento. Idealmente, cada teste de unidade é independente dos demais, o que possibilita ao programador testar cada módulo isoladamente.
+Jest é um framework de teste de JavaScript mantida pelo Facebook com foco na simplicidade. Trabalha com projetos usando: Babel, TypeScript, Node.js, React, Angular, Vue.js e Svelte. O objetivo é funcionar fora da caixa e sem configurações.
+
+> Para a instalação deste componente, utilize o comando abaixo para configurar a dependência em ambiente de desenvolvimento e instalar globalmente:
+```shell
+npm install jest -D
+npm install -g jest
+```
+
+> Para criar o arquivo de confiuração utilize o commando abaixo:
+```shell
+npm jest --init
+```
+
+> Exemplo de implementação de teste unitário sobre a soma de dois números:
+```js
+describe("Matemática", () => {
+  it("receber dois números e retorna a soma", () => {
+    const x = 2;
+    const y = 4;
+
+    const sum = x + y;
+    expect(sum).toBe(6);
+  });
+});
+```
+
+## Suporte
+
+Por favor entre em contato conosco via [Email]
